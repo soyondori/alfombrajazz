@@ -1,24 +1,18 @@
+import Two from 'two.js'
 import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import { DrawMode, drawGrid } from './grid'
+import { Vector } from 'two.js/src/vector'
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+const params = {
+  fullscreen: true
+}
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+const elem = document.body
+const two = new Two(params).appendTo(elem)
+
+drawGrid(two, {
+  position: new Vector(two.width * 0.5, two.height * 0.5),
+  size: new Vector(512, 512),
+  tiles: 5,
+  drawMode: DrawMode.Corner
+})
